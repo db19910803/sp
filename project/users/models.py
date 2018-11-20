@@ -9,29 +9,29 @@ class Users(models.Model):
     # 密码
     password = models.CharField(max_length=32)
     # 头像图片地址
-    headjpg = models.CharField(max_length=200,null=True)
+    headjpg = models.CharField(max_length=200,null=True, blank=True)
     # 昵称
-    name = models.CharField(max_length=20,null=True)
+    name = models.CharField(max_length=20,null=True, blank=True)
     # 性别
-    gender = models.IntegerField(choices=((1,'男'),(2,'女'),(0,'保密')),default=0)
+    gender = models.IntegerField(choices=((1,'男'),(2,'女')),default=1)
     # 出生日期
-    birthday = models.DateField(null=True)
+    birthday = models.DateField(null=True, blank=True)
     # 就读学校
-    school = models.CharField(max_length=200,null=True)
+    school = models.CharField(max_length=200,null=True, blank=True)
     # 地址
-    address = models.CharField(max_length=50,null=True)
+    address = models.CharField(max_length=50,null=True, blank=True)
     # 故乡
-    hometown = models.CharField(max_length=50,null=True)
+    hometown = models.CharField(max_length=50,null=True, blank=True)
     # 支付密码
-    paypassword = models.CharField(max_length=32,null=True)
+    paypassword = models.CharField(max_length=32,null=True, blank=True)
     # 账户余额
-    balance = models.DecimalField(max_digits=8,decimal_places=2,null=True)
+    balance = models.DecimalField(max_digits=8,decimal_places=2,null=True, blank=True)
     # 积分
-    intgral = models.IntegerField(null=True)
+    intgral = models.IntegerField(null=True, blank=True)
     # 创建时间
-    starttime = models.DateTimeField(auto_now_add=True)
+    starttime = models.DateTimeField(auto_now_add=True, blank=True)
     # 更新时间
-    updatetime = models.DateTimeField(auto_now=True)
+    updatetime = models.DateTimeField(auto_now=True, blank=True)
     # 假删除
     delatestate = models.BooleanField(default=False)
     # 红包  多对多的关系,需要建立一个红包列表(由于红包属于商家的,这个表不在users应用里面设计)
