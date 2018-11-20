@@ -1,0 +1,24 @@
+{% extends 'public/headandfoot.html' %}
+{% load static %}
+
+{% block title %}
+忘记密码
+{% endblock %}
+
+{% block information %}
+<div style="height: 49px;"></div>
+    <form action="" method="post">
+    {% csrf_token %}
+	    <input type="text" name="tel" value="{{ data.tel }}" placeholder="请输入手机号" class="login-password">
+        <p class="" style="color: red; margin-left: 3rem">{{ error.tel.0 }}</p>
+	    <div class="yzm">
+	    	<input type="text" class="reg-yzm" placeholder="输入验证码" />
+	    	<input type="button" class="yzm-hq" value="获取验证码" />
+	    </div>
+	    <input type="password" name="password"  placeholder="请输入密码" class="login-password">
+        <p class="" style="color: red; margin-left: 3rem">{{ error.password.0 }}</p>
+	    <input type="password" name="re_password"  placeholder="确认密码" class="login-name">
+        <p class="" style="color: red; margin-left: 3rem">{{ error.re_password.0 }}</p>
+	    <input type="submit" class="login-btn" value="立即提交">
+    </form>
+{% endblock %}
