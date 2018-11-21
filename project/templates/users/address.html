@@ -1,0 +1,45 @@
+{% extends 'public/headandfoot.html' %}
+{% load static %}
+
+{% block title %}
+新增收货地址
+{% endblock %}
+
+{% block information %}
+    <form action="" method="post">
+    {% csrf_token %}
+<div style="height: 60px;"></div>
+        <p class="" style="color: red; margin-left: 3rem">{{ woring }}</p>
+	    <ul class="address">
+	    	<li>
+	    		<a href="javascript:;"><input type="text" value="{{ data.dormitaryarea }}" name="dormitaryarea" class="add-input" placeholder="宿舍区" />
+	    		<i class="am-icon-angle-right" style="float: right; margin-top: 5px;"></i></a>
+	    	</li>
+            <p class="" style="color: red; margin-left: 3rem">{{ error.dormitaryarea.0 }}</p>
+	    	<li>
+	    		<a href="javascript:;"><input type="text" value="{{ data.tower }}" name="tower" class="add-input"  placeholder="哪栋楼" />
+	    		<i class="am-icon-angle-right" style="float: right; margin-top: 5px;"></i></a>
+	    	</li>
+            <p class="" style="color: red; margin-left: 3rem">{{ error.tower.0 }}</p>
+	    	<li><input type="text" value="{{ data.detailarea }}" name="detailarea" class="add-input" placeholder="你在哪" /></li>
+            <p class="" style="color: red; margin-left: 3rem">{{ error.detailarea.0 }}</p>
+	    	<li><input type="text" value="{{ data.person }}" name="person" class="add-input" placeholder="收货人" /></li>
+            <p class="" style="color: red; margin-left: 3rem">{{ error.person.0 }}</p>
+	    	<li><input type="text" value="{{ data.linktel }}" name="linktel" class="add-input" placeholder="13000000000" /></li>
+            <p class="" style="color: red; margin-left: 3rem">{{ error.linktel.0 }}</p>
+	    </ul>
+	    <div class="moren">
+	    	<label class="am-checkbox am-warning">
+                 <input type="checkbox" checked="checked" name="defaults" value="Ture" data-am-ucheck checked>设为默认 <br>
+                <p class="" style="color: red; margin-left: 3rem">{{ error.defaults.0 }}</p></li>
+            </label>
+
+	    </div>
+	    <input type="submit" class="login-btn" value="确认提交">
+    </form>
+{% endblock %}
+
+{% block infootjs %}
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/amazeui.min.js' %}"></script>
+{% endblock %}

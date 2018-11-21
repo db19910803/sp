@@ -1,0 +1,83 @@
+{% extends 'public/headandfoot.html' %}
+{% load static %}
+
+{% block title %}
+个人资料
+{% endblock %}
+
+{% block information %}
+    <form action="" method="post">
+    {% csrf_token %}
+	    <div style="height: 49px;"></div>
+	    <ul class="safty1">
+	    	<li>
+	    		<a href="">
+	    			<i style="margin-top: 25px;">头像</i>
+	    			<div class="infor-pic">
+	    				<img src="{% static 'images/infortx.png' %}" />
+	    			</div>
+	    		</a>
+	    	</li>
+	    	<li>
+	    		<a href="">
+	    			<i>昵称</i>
+	    			<input class="infor-tele" name="name" value="{{ data.name|default:'匿名' }}" placeholder="默契"/>
+	    		</a>
+	    	</li>
+	    	<li>
+	    		<a href="">
+	    			<i>性别</i>
+	    			<i class="infor-tele">
+	    				<label class="am-radio-inline">
+                            {% if data.gender == 2 %}
+                                <input type="radio" name="gender"  value="1" data-am-ucheck>男
+                            </label>
+                            <label class="am-radio-inline">
+                        <input type="radio" name="gender" checked="checked" value="2" data-am-ucheck>女
+                                {% else %}
+                             <input type="radio" name="gender" checked="checked" value="1" data-am-ucheck>男
+                            </label>
+                            <label class="am-radio-inline">
+                        <input type="radio" name="gender"  value="2" data-am-ucheck>女
+                            {% endif %}
+				        </label>
+	    			</i>
+	    		</a>
+	    	</li><li>
+	    		<a href="">
+	    			<i>生日</i>
+                    <input class="infor-tele" name="birthday" placeholder="出生日期"/>
+	    		</a>
+	    	</li>
+	    </ul>
+	    <div style="height: 10px; background: #efefef;"></div>
+	     <ul class="safty1">
+	    	<li>
+	    			<i>学校</i>
+	    			<input class="infor-tele" name="school" value="{{ data.school|default:'就读院校' }}" placeholder="就读于哪个学校"/>
+	    	</li>
+	    	<li>
+	    			<i>位置</i>
+	    			<input class="infor-tele" name="address" value="{{ data.address|default:'详细地址' }}" placeholder="详细地址"/>
+	    	</li>
+	    	<li>
+	    			<i>故乡</i>
+                    <input class="infor-tele" name="hometown" value="{{ data.hometown|default:'家乡' }}" placeholder="来自哪里"/>
+	    	</li>
+	    	<li>
+	    			<i>手机</i>
+                    <input class="infor-tele" name="" placeholder="{{ data.tel }}"/>
+	    	</li>
+	    </ul>
+        <input type="submit" style="margin-left: 3rem" value="提交">
+    </form>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+{% block infootjs %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/amazeui.min.js' %}"></script>
+{% endblock %}
