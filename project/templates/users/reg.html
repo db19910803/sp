@@ -2,37 +2,90 @@
 {% load static %}
 
 {% block title %}
-注册
+    注册
 {% endblock %}
 
 {#中间的内容#}
 {% block information %}
     <form action="" method="post">
-    {% csrf_token %}
-	    <div style="height: 49px;"></div>
-	    <!--<div class="login-logo">
-	    	<img src="images/logo.png" />
-	    </div>-->
-	    <div style="height: 3rem;"></div>
-	    <input type="text" value="{{ data.tel }}" name="tel"  placeholder="请输入手机号" class="login-name">
+        {% csrf_token %}
+        <div style="height: 49px;"></div>
+        <!--<div class="login-logo">
+            <img src="images/logo.png" />
+        </div>-->
+        <div style="height: 3rem;"></div>
+        <input type="text" value="{{ data.tel }}" name="tel" placeholder="请输入手机号" class="login-name">
         <p class="" style="color: red; margin-left: 3rem">{{ error.tel.0 }}</p>
-	    <input type="password" name="password"  placeholder="请输入密码" class="login-password">
+        <input type="password" name="password" placeholder="请输入密码" class="login-password">
         <p class="" style="color: red; margin-left: 3rem">{{ error.password.0 }}</p>
-	    <input type="password" name="re_password"  placeholder="确认密码" class="login-name">
+        <input type="password" name="re_password" placeholder="确认密码" class="login-name">
         <p class="" style="color: red; margin-left: 3rem">{{ error.re_password.0 }}</p>
-	    <div class="yzm" style="margin-top: 1.5rem;">
-	    	<input type="text" class="reg-yzm" placeholder="输入验证码" />
-	    	<input type="button" class="yzm-hq" value="获取验证码" />
-	    </div>
-	     <input type="submit" class="login-btn" value="立即注册">
+        <div class="yzm" style="margin-top: 1.5rem;">
+            <input type="text" name="yzm" class="reg-yzm" placeholder="输入验证码"/>
+            <input type="button" name="yzm_in" class="yzm-hq"  value="获取验证码"/>
+        </div>
+        <input type="submit" class="login-btn" value="立即注册">
     </form>
-	    <div class="agree">
-	    	<input type="checkbox" name="checkbox" value="同意" checked="">&nbsp;同意
-		    <a href="" class="xy">《用户协议》</a>
-		      <div class="r-login">已有账号，请<a href="{% url 'users:登录' %}" class="l-login">登录</a></div>
-	    </div>
+    <div class="agree">
+        <input type="checkbox" name="checkbox" value="同意" checked="">&nbsp;同意
+        <a href="" class="xy">《用户协议》</a>
+        <div class="r-login">已有账号，请<a href="{% url 'users:登录' %}" class="l-login">登录</a></div>
+    </div>
 
 {% endblock %}
 {% block footer %}
 
+{% endblock %}
+
+{% block infootjs %}
+    <script>
+        $(function () {
+            // 加载完成之后进行
+            {#绑定事件#}
+            $('.yzm-hq').on('click', function () {
+                {#事件绑定成功之后进行参数获取#}
+                var tel = $('input[name="tel"]').val();
+                {#console.debug(tel)#}
+                {#进行ajax写入#}
+                {#传入的数据中需要csrf进行验证#}
+                $.ajax({
+                    dataType: "json",
+                    type: 'POST',
+                    data: {"tel": tel, "csrfmiddlewaretoken": "{{ csrf_token }}"},
+                    url: '{% url "users:短信验证" %}',
+                    success: function (data) {
+                        {#console.debug(111)#}
+                        {#验证手机号是否正确#}
+                        {#如果返回值是0,则表明已经写入redis,如果为1则表明手机验证错误#}
+                        if (data.key === 1) {
+                            {#表明是手机验证错误#}
+                            alert('手机号码格式不正确')
+                        } else {
+                            {#不是1则表明数据已经写入#}
+                            {#设置周期性时间显示#}
+                            var num1 = 10;
+                           var times = setInterval(function () {
+                               {#在内部写周期函数#}
+                               {#进入倒计时后不能让用户进行点击#}
+                               $('.yzm-hq').attr('disabled','disabled');
+                               {#改变背景颜色#}
+                               $('.yzm-hq').css('background','#99c');
+                               num1 = num1 - 1;
+                               {#进行显示#}
+                               {#console.debug(num1);#}
+                               $('.yzm-hq').val(num1 + '秒后重新获取');
+                               if (num1 === 0){
+                                   {#如果时间已经到了,则需要将颜色变回,并将disable取消,并终止时间周期#}
+                                   $('.yzm-hq').removeAttr('disabled');
+                                   $('.yzm-hq').css('background','#76bb2a');
+                                   $('.yzm-hq').val('获取验证码');
+                                   return clearInterval(times)
+                               }
+                           }, 1000);
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 {% endblock %}

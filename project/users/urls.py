@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from users.views import show, log_in, reg_in, findback, personpage, gladdress, address
+from users.views import show, log_in, reg_in, findback, personpage, gladdress, address, short_msg
 
 urlpatterns = [
     url(r'^$',show,name='主页'),
@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^infor/$',personpage,name='个人首页'),
     url(r'^gladdress/$',gladdress,name='收货地址显示页'),
     url(r'^address/$',address,name='添加收货地址'),
+    url(r'^short_msg/$',short_msg,name='短信验证'),
 ]

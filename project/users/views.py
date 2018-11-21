@@ -1,6 +1,8 @@
+import random
+import re
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
-
+from django.http import JsonResponse
 # Create your views here.
 
 # 显示主页
@@ -210,7 +212,8 @@ def address(request):
             # 验证通过后
             clean_data = form.cleaned_data
             # 由于最多只能有六个地址，所以这里需要先进行判定是否已经有六个地址
-            if len(Shipaddress.objects.filter(delates=0)) == 6:
+            users = Users.objects.get(tel=request.session.get('tel'))
+            if len(users.shipaddress_set.filter(defaults=0)) == 6:
                 # 表明已经有了6个地址,此时需要进行提示最多只有六条并不执行后面的语句
                 context = {
                     'woring': '您已经拥有六条收货地址,请删除后再添加'
@@ -234,3 +237,27 @@ def address(request):
             return render(request,'users/address.html',context=context)
     else:
         return render(request, 'users/address.html')
+
+
+
+from django_redis import *
+def short_msg(request):
+    # 当点击之后进行调用函数,返回的是json对象
+    # 生成随机数
+    # 先验证手机号的合法性
+    tel = request.POST.get('tel')
+    res = re.search('^1[3-9]\d{9}$', tel)
+    if res:
+        random_num = [str(random.randint(0,9)) for _ in range(4)]
+        random_num = ''.join(random_num)
+        # 产生随机数字之后进行写入数据库
+        cnn = get_redis_connection('default')
+        cnn.set(tel,random_num)
+        cnn.expire(tel,300)
+        # r = cnn.get(tel)
+        print(random_num)
+        # 向阿里法送短信验证请求
+        return JsonResponse({"key": 0})
+    else:
+        # 表单验证失败
+        return JsonResponse({'key': 1})
