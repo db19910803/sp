@@ -1,11 +1,14 @@
 import random
 import re
+import uuid
+
 from django.http import HttpResponse
 from django.shortcuts import render,redirect
 from django.http import JsonResponse
 # Create your views here.
 
 # 显示主页
+from helper.demo_sms_send import send_sms
 from users.forms import Reg_in, Log_in, Find_password, PersonModelFrom, Address_get
 from users.models import Users, Shipaddress
 
@@ -257,6 +260,11 @@ def short_msg(request):
         # r = cnn.get(tel)
         print(random_num)
         # 向阿里法送短信验证请求
+        __business_id = uuid.uuid1()
+        # print(__business_id)
+        params = "{\"code\":\"%s\",\"product\":\"老子就是做个短信验证而已\"}" % random_num
+        # params = u'{"name":"wqb","code":"12345678","address":"bz","phone":"13000000000"}'
+        send_sms(__business_id,tel, "注册验证", "SMS_2245271", params)
         return JsonResponse({"key": 0})
     else:
         # 表单验证失败

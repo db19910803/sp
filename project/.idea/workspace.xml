@@ -2,66 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dad6eb68-aedc-4f23-84e8-c8dc329b64f5" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/dysms_python/MANIFEST.in" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/README.rst" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdybaseapi/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdybaseapi/request/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdybaseapi/request/v20170525/QueryTokenForMnsQueueRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdybaseapi/request/v20170525/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/QueryInterSmsIsoInfoRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/QuerySendDetailsRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/QueryTokenForMnsQueueRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/SendBatchSmsRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/SendInterSmsRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/SendSmsRequest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/aliyunsdkdysmsapi/request/v20170525/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/const.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/demo_sms_api.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/demo_sms_query.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/demo_sms_send.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/README" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/bin/mnscmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_account.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_exception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_http.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_pkg_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_queue.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_request.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_subscription.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_tool.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_topic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/mns/mns_xml_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample.cfg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/access_log.8080" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/createqueue.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/createtopic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/deletequeue.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/deletetopic.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/endpoint_log.8080" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/publishmessage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/recvdelmessage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/sample_common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/sendmessage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/simple_http_notify_endpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/simple_https_notify_endpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/subscribe.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/sample/subscribe_queueendpoint.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/mns_python_sdk/setup.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dysms_python/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/helper/demo_sms_send.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dysms_python/const.py" beforeDir="false" afterPath="$PROJECT_DIR$/dysms_python/const.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/project/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/users/reg.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/users/reg.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -106,39 +51,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/users/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1097">
-              <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
-              <folding>
-                <element signature="e#0#13#0" expanded="true" />
-                <element signature="e#326#591#0" />
-                <element signature="e#631#769#0" />
-                <element signature="e#803#2585#0" />
-                <element signature="e#2619#3972#0" />
-                <element signature="e#4008#5525#0" />
-                <element signature="e#5573#6400#0" />
-                <element signature="e#6542#7865#0" />
-                <element signature="e#7948#8423#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="forms.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/users/forms.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-              <folding>
-                <element signature="e#10#34#0" expanded="true" />
-                <element signature="e#218#1093#0" />
-                <element signature="e#1134#1444#0" />
-                <element signature="e#1490#1836#0" />
-                <element signature="e#1896#2005#0" />
-                <element signature="e#2056#2357#0" />
-              </folding>
+            <state relative-caret-position="218">
+              <caret line="264" column="61" selection-start-line="264" selection-start-column="61" selection-end-line="264" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -182,9 +99,11 @@
         <option value="$PROJECT_DIR$/templates/users/address.html" />
         <option value="$PROJECT_DIR$/templates/users/member.html" />
         <option value="$PROJECT_DIR$/users/urls.py" />
-        <option value="$PROJECT_DIR$/project/settings.py" />
         <option value="$PROJECT_DIR$/users/forms.py" />
         <option value="$PROJECT_DIR$/templates/users/reg.html" />
+        <option value="$PROJECT_DIR$/dysms_python/const.py" />
+        <option value="$PROJECT_DIR$/project/settings.py" />
+        <option value="$PROJECT_DIR$/helper/demo_sms_send.py" />
         <option value="$PROJECT_DIR$/users/views.py" />
       </list>
     </option>
@@ -222,29 +141,7 @@
             <path>
               <item name="project" type="b2602c69:ProjectViewProjectNode" />
               <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="project" type="b2602c69:ProjectViewProjectNode" />
-              <item name="project" type="462c0819:PsiDirectoryNode" />
-              <item name="users" type="462c0819:PsiDirectoryNode" />
+              <item name="helper" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -265,11 +162,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\GIT\sp2\project\helper" />
       <recent name="D:\GIT\sp2\project" />
       <recent name="D:\GIT\sp2\project\templates\users" />
       <recent name="D:\GIT\sp2\project\static\test" />
       <recent name="D:\GIT\sp2\project\static" />
-      <recent name="D:\GIT\sp2\project\users" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -299,7 +196,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="launchJavascriptDebuger" value="false" />
-      <option name="port" value="8001" />
+      <option name="port" value="8000" />
       <option name="host" value="" />
       <option name="additionalOptions" value="" />
       <option name="browserUrl" value="" />
@@ -341,21 +238,27 @@
       <option name="project" value="LOCAL" />
       <updated>1542760901830</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="阿里短信功能尚未完成">
+      <created>1542844253390</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1542844253390</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="14" sideWeight="0.50075644" side_tool="true" weight="0.22112212" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32838285" />
       <window_info anchor="bottom" id="Python Console" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.22112212" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.24257426" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49866667" visible="true" weight="0.17170954" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.4768977" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.1350906" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49866667" visible="true" weight="0.18305598" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" weight="0.32980332" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -376,6 +279,16 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -383,7 +296,8 @@
     <MESSAGE value="完成登录注册和密码找回" />
     <MESSAGE value="push尝试" />
     <MESSAGE value="购物地址存入功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="购物地址存入功能" />
+    <MESSAGE value="阿里短信功能尚未完成" />
+    <option name="LAST_COMMIT_MESSAGE" value="阿里短信功能尚未完成" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -391,24 +305,20 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/project/urls.py">
+    <entry file="file://$PROJECT_DIR$/helper/demo_sms_send.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="189">
+          <caret line="7" column="11" lean-forward="true" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/urls.py">
+    <entry file="file://$PROJECT_DIR$/users/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="10" column="44" selection-start-line="10" selection-start-column="44" selection-end-line="10" selection-end-column="44" />
+        <state relative-caret-position="7263">
+          <caret line="269" column="16" selection-start-line="269" selection-start-column="16" selection-end-line="269" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -665,9 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/3/re.pyi">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://D:/homeWorkFor20181108/project1/Lib/site-packages/django_redis/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -682,20 +589,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/users/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="27">
           <caret line="7" column="39" lean-forward="true" selection-start-line="7" selection-start-column="39" selection-end-line="7" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -720,43 +617,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/users/forms.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dysms_python/demo_sms_send.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dysms_python/const.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="2" column="36" selection-start-line="2" selection-start-column="36" selection-end-line="2" selection-end-column="36" />
+        <state relative-caret-position="81">
+          <caret line="3" selection-start-line="3" selection-end-line="4" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="142" column="31" lean-forward="true" selection-start-line="142" selection-start-column="31" selection-end-line="142" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/helper/demo_sms_send.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="70" column="55" lean-forward="true" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+          <folding>
+            <element signature="e#24#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/users/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1097">
-          <caret line="241" lean-forward="true" selection-start-line="241" selection-end-line="241" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#326#591#0" />
-            <element signature="e#631#769#0" />
-            <element signature="e#803#2585#0" />
-            <element signature="e#2619#3972#0" />
-            <element signature="e#4008#5525#0" />
-            <element signature="e#5573#6400#0" />
-            <element signature="e#6542#7865#0" />
-            <element signature="e#7948#8423#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/users/forms.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="e#10#34#0" expanded="true" />
-            <element signature="e#218#1093#0" />
-            <element signature="e#1134#1444#0" />
-            <element signature="e#1490#1836#0" />
-            <element signature="e#1896#2005#0" />
-            <element signature="e#2056#2357#0" />
-          </folding>
+        <state relative-caret-position="218">
+          <caret line="264" column="61" selection-start-line="264" selection-start-column="61" selection-end-line="264" selection-end-column="61" />
         </state>
       </provider>
     </entry>
