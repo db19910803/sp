@@ -124,16 +124,17 @@
     {{ i.name }}
 </div>
 <ul data-am-widget="gallery" class="am-gallery pro-list am-avg-sm-2 am-avg-md-2 am-avg-lg-4 am-gallery-default">
-
-    <li>
+    {% for j in i.active_goods_set.all %}
+        <li>
         <div class="am-gallery-item">
             <a href="detail.html" class="">
-                <img src=" images/test.png"/>
-                <h3 class="am-gallery-title">猪骨头棒新鲜生鲜肉制品猪大骨头筒骨熬汤佳品500g</h3>
-                <div class="am-gallery-desc">￥52</div>
+                <img src="{{ MEDIA_URL }}{{ j.link_SKU.logo_address }}"/>
+                <h3 class="am-gallery-title">{{ j.link_SKU.goods_spu_id.name }}&emsp;{{ j.link_SKU.name }}</h3>
+                <div class="am-gallery-desc">￥{{ j.link_SKU.price }}</div>
             </a>
         </div>
     </li>
+    {% endfor %}
 
 </ul>
 {% endfor %}
