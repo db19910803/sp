@@ -127,7 +127,7 @@
     {% for j in i.active_goods_set.all %}
         <li>
         <div class="am-gallery-item">
-            <a href="detail.html" class="">
+            <a href="{% url 'goods:商品详情' j.link_SKU.pk %}" class="">
                 <img src="{{ MEDIA_URL }}{{ j.link_SKU.logo_address }}"/>
                 <h3 class="am-gallery-title">{{ j.link_SKU.goods_spu_id.name }}&emsp;{{ j.link_SKU.name }}</h3>
                 <div class="am-gallery-desc">￥{{ j.link_SKU.price }}</div>
