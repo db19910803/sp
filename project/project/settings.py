@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'order.apps.OrderConfig',
     'shopping.apps.ShoppingConfig',
     'users.apps.UsersConfig',
+    # 富文本编辑添加
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -129,6 +132,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+# STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+
 CACHES = {
         "default": {
             "BACKEND": "django_redis.cache.RedisCache",
@@ -150,3 +156,13 @@ ACCESS_KEY_SECRET = "FzORQ587PgGBoOAdmxzCjaxQi8klUi"
 # 上传图片的配置
 MEDIA_URL = "/static/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+
+# 设置富文本编辑中的上传目录
+CKEDITOR_UPLOAD_PATH = "static/ex_file/"
+
+# 设置富文本进行全功能显示
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}

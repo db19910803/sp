@@ -17,6 +17,17 @@
             white-space: normal;
             text-overflow: ellipsis;
         }
+        .list-price{
+            background: url({% if order == 2 %}
+            {% static 'images/order-bot.png' %}
+                {% elif order == 3 %}
+                {% static 'images/order-top.png' %}
+                {% else %}
+                {% static 'images/order.png' %}
+            {% endif %}) no-repeat right center;
+            padding-right: 20px;
+            font-style: normal;
+    }
     </style>
 {% endblock %}
 
@@ -25,7 +36,7 @@
     <ul class="list-nav">
         <li {% if order == 0 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 0 %}">综合</a></li>
         <li {% if order == 1 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 1 %}">销量</a></li>
-        <li {% if order == 2 %}class="current"{% elif order == 3 %}{% endif %}><a href="{% url 'goods:分类页' goods_id 2 %}"><i class="list-price">价格</i></a></li>
+        <li {% if order == 2 %}class="current"{% elif order == 3 %}{% endif %}><a id="img_change"  href="{% url 'goods:分类页' goods_id 2 %}"><i class="list-price">价格</i></a></li>
         <li {% if order == 4 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 4 %}">新品</a></li>
     </ul>
     <div class="content-list">
@@ -114,7 +125,15 @@
                     update_item(self.siblings('input').data('item-id'));
                 }
             })
-        })
+        });
+        $(function () {
+            // 加载完成后再执行
+            if ('{{ order }}' == 2){
+                $('#img_change').attr('href','{% url 'goods:分类页' goods_id 3 %}');
+            }else if ('{{ order }}' == 3) {
+                $('#img_change').attr('href','{% url 'goods:分类页' goods_id 2 %}');
+            };
+        });
 
     </script>
 {% endblock %}

@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 from django.conf import  settings
 # Create your models here.
@@ -55,7 +56,7 @@ class Goods_class(Public_form):
 # 商品SUP列表
 class Goods_SUP(Public_form):
     name = models.CharField(max_length=20,verbose_name='名称')
-    detail = models.TextField(verbose_name='详情')
+    detail = RichTextUploadingField(verbose_name='详情')
     class Meta:
         verbose_name = '商品类别表'
         verbose_name_plural = verbose_name

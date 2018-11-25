@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^goods/', include('goods.urls',namespace='goods')),
     url(r'^shopping/', include('shopping.urls',namespace='shopping')),
     url(r'^order/', include('order.urls',namespace='order')),
+    # 富文本文件上传自动调用
+    url(r'^ckeditor/', include("ckeditor_uploader.urls")),
 ]

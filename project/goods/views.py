@@ -57,7 +57,7 @@ def category_show(request,goods_id,order_id):
         order_id = 0
         goods = Goods_class.objects.first().goods_sku_set.all().order_by(order_rul[order_id])
     # 进行分页的操作
-    page_size = 1
+    page_size = 10
     p = Paginator(goods,page_size)
     # 从页面获得对应的数据,如果没有则显示第一页
     get_page = request.GET.get('page_id', 1)
