@@ -5,11 +5,11 @@ from django.db import models
 # 用户信息表格
 class Users(models.Model):
     # 电话
-    tel = models.IntegerField()
+    tel = models.IntegerField(verbose_name='用户')
     # 密码
     password = models.CharField(max_length=32)
     # 头像图片地址
-    headjpg = models.CharField(max_length=200,null=True, blank=True)
+    headjpg = models.FileField(verbose_name='头像')
     # 昵称
     name = models.CharField(max_length=20,null=True, blank=True)
     # 性别

@@ -104,6 +104,9 @@ def log_in(request):
                 # 如果找到了则表明用户输入正确进行跳转到个人主页
                 request.session['tel'] = request.POST.get('tel')
                 request.session.set_expiry(0)
+                # 这里如果存在从购物地方进行跳转过来则这里需要判定,进行跳转回去的操作
+                if request.GET.get('next'):
+                    return redirect(request.GET.get('next'))
                 return redirect('users:主页')
             else:
                 # 如果错误则表明用户名密码不正确,需要进行重新输入并提示

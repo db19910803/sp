@@ -21,6 +21,7 @@
 {% endblock %}
 
 {% block information %}
+    {% csrf_token %}
     <div style="height: 49px;"></div>
 	    <!--图片轮换-->
 		<div class="am-slider am-slider-default" data-am-flexslider id="demo-slider-0">
@@ -43,9 +44,7 @@
             <div class="d-stock">
               <a class="decrease">-</a>
                 <input id="num" readonly="" class="text_box" name="" type="text" value="1">
-                <input id="id" type="hidden" value="644">
                 <a class="increase">+</a>
-               <span id="dprice" class="price" style="display:none"> 36</span>
             </div>
         </div>
         <div style="background: #eee; height: 10px;"></div>
@@ -113,7 +112,7 @@
 {% block footer %}
  <div style=" height: 55px;"></div>
  <ul class="fix-shopping">
- 	<li><a href="shopcart.html" class="join">加入购物车</a></li>
+ 	<li><a href="javascript:;" class="join">加入购物车</a></li>
  	<li><a href="tureorder.html" class="imm-buy">立即购买</a></li>
  </ul>
 {% endblock %}
@@ -128,17 +127,44 @@
 			var current_num = parseInt(self.siblings('input').val());
 			current_num += 1;
 			self.siblings('input').val(current_num);
-			update_item(self.siblings('input').data('item-id'));
-		})
+		});
 		$('.decrease').click(function(){
 			var self = $(this);
 			var current_num = parseInt(self.siblings('input').val());
 			if(current_num > 1){
 				current_num -= 1;
 				self.siblings('input').val(current_num);
-				update_item(self.siblings('input').data('item-id'));
 			}
-		})
+		});
+        $('.join').on('click',function () {
+            {#console.debug(111)#}
+            {#需要获取tel,sku_id,count进行数据的传入#}
+            var sku_id = "{{ data.id }}";
+            var count = $('#num').val();
+            console.debug(count);
+            {#console.debug(sku_id,count)#}
+            {#数据获取完成后进行ajax传给后台#}
+            $.ajax({
+                type:"POST",
+                dataType:"json",
+                url:"{% url 'shopping:ajax购物功能' %}",
+                data:{"sku_id":sku_id,"count":count,"csrfmiddlewaretoken":"{{ csrf_token }}"},
+                success:function (data) {
+                    {#console.debug(data)#}
+                    {#如果返回的是1,表示用户没有登录,则需要跳转到登录页面#}
+                    console.debug(data.key);
+                    if (data.key == 1){
+                        location.href="{% url 'users:登录' %}?next={% url 'goods:商品详情' data.id %}"
+                    }else if (data.key == 2){
+                        alert('商品部存在');
+                    } else if(data.key == 3){
+                        alert('商品数量不合法');
+                    } else if(data.key == 4){
+                        alert('库存不足');
+                    }
+                }
+            })
+        })
 	})
 </script>
 

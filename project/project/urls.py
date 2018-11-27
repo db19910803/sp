@@ -18,6 +18,8 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    # 全文搜索框架
+    url(r'^search/', include('haystack.urls')),
     url(r'^user/', include('users.urls',namespace='users')),
     url(r'^goods/', include('goods.urls',namespace='goods')),
     url(r'^shopping/', include('shopping.urls',namespace='shopping')),

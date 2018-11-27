@@ -31,12 +31,28 @@
     </style>
 {% endblock %}
 
+{% block header %}
+<header data-am-widget="header" class="am-header am-header-default sq-head ">
+			<div class="am-header-left am-header-nav">
+				<a href="javascript:history.back()" class="">
+					<i class="am-icon-chevron-left"></i>
+				</a>
+			</div>
+            <form action="/search/" method="get">
+		    <div class="cate-search">
+		    	<input type="text" name="q" value="" class="cate-input" placeholder="请输入您要的搜索的产品关键词" />
+		    	<input type="submit" value="" class="cate-btn" />
+	        </div>
+            </form>
+	    </header>
+{% endblock %}
+
 {% block information %}
     <div style="height: 49px;"></div>
     <ul class="list-nav">
         <li {% if order == 0 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 0 %}">综合</a></li>
         <li {% if order == 1 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 1 %}">销量</a></li>
-        <li {% if order == 2 %}class="current"{% elif order == 3 %}{% endif %}><a id="img_change"  href="{% url 'goods:分类页' goods_id 2 %}"><i class="list-price">价格</i></a></li>
+        <li {% if order == 2 %}class="current" {% elif order == 3 %}class="current"{% endif %}><a id="img_change"  href="{% url 'goods:分类页' goods_id 2 %}"><i class="list-price">价格</i></a></li>
         <li {% if order == 4 %}class="current"{% endif %}><a href="{% url 'goods:分类页' goods_id 4 %}">新品</a></li>
     </ul>
     <div class="content-list">
@@ -60,9 +76,9 @@
                     </div>
                     <div class="list-cart">
                         <div class="d-stock ">
-                            <a class="decrease">-</a>
-                            <input id="num" readonly="" class="text_box" name="" type="text" value="0">
-                            <a class="increase">+</a>
+                            <a class="decrease" sku_id="{{ j.pk }}">-</a>
+                            <input id="num" style="display: none" readonly="" class="text_box" name="" type="text" value="0">
+                            <a class="increase" sku_id="{{ j.pk }}">+</a>
                         </div>
                     </div>
                     <!--<a href="" class="list-cart"><img src="images/cart.png" width="30"/></a>-->
@@ -83,7 +99,7 @@
 {% block footer %}
     <div style="height: 55px;"></div>
     <div class="fix-bot">
-        <div class="fix-bot-cart"><i>8</i></div>
+        <div class="fix-bot-cart"><i id="my_sum"></i></div>
         <a href="" class="list-js">去结算</a>
         <a href="" class="list-jsk">一键快购</a>
         <!--<div class="js-text">
@@ -105,26 +121,61 @@
                 var self = $(this);
                 var current_num = parseInt(self.siblings('input').val());
                 current_num += 1;
+
+                // 进行ajax的数据库写入,这里需要的到tel,对应的sku_id,而count是每点击一次就变化,所以常值为1
+                var count = 1;
+                var sku_id = $(this).attr('sku_id');
+                {#console.debug(count,sku_id)#}
+                $.ajax({
+                    type:"POST",
+                    dataType:"json",
+                    url:"{% url 'goods:产品分类列表ajax添加' %}",
+                    data:{"sku_id":sku_id,"count":count,"csrfmiddlewaretoken":"{{ csrf_token }}"},
+                    success:function (data) {
+                        // 拿到data上的sum数据,然后再改写页面
+                        var sum = data.sum;
+                        $('#my_sum').text(sum)
+                    }
+                })
+
                 if (current_num > 0) {
                     self.siblings(".decrease").fadeIn();
                     self.siblings(".text_box").fadeIn();
                 }
                 self.siblings('input').val(current_num);
-                update_item(self.siblings('input').data('item-id'));
-            })
+            });
             $('.decrease').click(function () {
                 var self = $(this);
                 var current_num = parseInt(self.siblings('input').val());
                 if (current_num > 0) {
                     current_num -= 1;
+                    // 进行ajax的数据库写入,这里需要的到tel,对应的sku_id,而count是每点击一次就变化,所以常值为1
+                    var count = -1;
+                    var sku_id = $(this).attr('sku_id');
+                    {#console.debug(count,sku_id)#}
+                    $.ajax({
+                        type:"POST",
+                        dataType:"json",
+                        url:"{% url 'goods:产品分类列表ajax添加' %}",
+                        data:{"sku_id":sku_id,"count":count,"csrfmiddlewaretoken":"{{ csrf_token }}"},
+                        success:function (data) {
+                            // 拿到data上的sum数据,然后再改写页面
+                            var sum = data.sum;
+                            $('#my_sum').text(sum);
+                            {#并且将对应的显示出来#}
+                            $('#num').css('display','block')
+                        }
+                    });
+
+
                     if (current_num < 1) {
                         self.fadeOut();
                         self.siblings(".text_box").fadeOut();
                     }
                     self.siblings('input').val(current_num);
-                    update_item(self.siblings('input').data('item-id'));
                 }
-            })
+            });
+            // 这里写ajax绑定两个进行加减功能
         });
         $(function () {
             // 加载完成后再执行
@@ -134,6 +185,5 @@
                 $('#img_change').attr('href','{% url 'goods:分类页' goods_id 2 %}');
             };
         });
-
     </script>
 {% endblock %}

@@ -1,8 +1,10 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 
 # Create your views here.
+from django_redis import get_redis_connection
+
 from goods.models import Index_run_jpg, Index_active_list, Index_active_area, Goods_SKU, Goods_class
 
 
@@ -20,11 +22,12 @@ def show(request):
     #     data['{}'.format(i.name)] = ''
     #     for j in i.active_goods_set.all():
     #         j.link_SKU.all()
-
+    first_pk = Goods_class.objects.first().pk
     context = {
         'jpg':run_jpg,
         'active_jpg':active_jpg,
         'active_area':active_area,
+        'first_pk':first_pk,
     }
     return render(request,'goods/index.html',context=context)
 
@@ -69,7 +72,6 @@ def category_show(request,goods_id,order_id):
     except EmptyPage:
         content = p.page(p.num_pages) # 如果超过总页数则显示最后一页
     goods = content # 将显示结果重新赋值给goods
-
     context = {
         'goods_class':goods_class,
         'goods_id':int(goods_id),
@@ -77,3 +79,50 @@ def category_show(request,goods_id,order_id):
         'goods':goods,
     }
     return  render(request,'goods/category.html',context=context)
+
+# 进行购物添加的方式
+def ajax_add_goods(request):
+    # 必须进行验证用户
+    if request.method == 'POST':
+        # 从页面获取数据,需要从页面获取对应的sku_id,购买数量count,从session中获得用户tel
+        sku_id = request.POST.get('sku_id')
+        count = request.POST.get('count')
+        # 拿到数据后对数据进行验证,用户tel是从个session中拿的,判定是否存在
+        # sku_id要判定是否是数字,count需要判定是否是数字
+        # 如果数据没有问题才进行数据库的写入,如果有问题则返回错误信息
+        if not request.session.get('tel'):
+            return JsonResponse({'key': 1, 'errormsg': '用户没有登录'})
+        else:
+            tel = request.session.get('tel')
+        try:
+            sku_id = int(sku_id)
+            # 针对商品ID进行判断商品是否存在
+            Goods_SKU.objects.get(pk=sku_id)
+        except:
+            return JsonResponse({'key': 2, 'errormsg': '商品ID不合法'})
+        try:
+            count = int(count)
+            # 进行判定是否已经超出了库存
+            num = Goods_SKU.objects.get(pk=sku_id).sales
+            if count >= int(num):
+                return JsonResponse({'key': 4, 'errormsg': '商品数目不合法'})
+        except:
+            return JsonResponse({'key': 3, 'errormsg': '商品数目不合法'})
+        # 数据都验证通过,则需要进行数据库的写入,这里写入的是redis数据库
+        # 创建redis连接
+        cnn = get_redis_connection('default')
+        # 进行数据写入
+        res = cnn.hincrby(tel, sku_id, count)
+        # 这里需要进行判断
+        if res == 0:
+            # 表示已经减少到了零,需要从数据库中间删除对应的filed
+            cnn.hdel(tel, sku_id)
+        # 数据写入完成后则进行返回,并且需要返回整个数据库中所有商品的总和
+        # 查询数据库,得到总和
+        nums = cnn.hgetall(tel)
+        sum = 0
+        for k,v in nums.items():
+            sum += int(v.decode('utf-8'))
+        return JsonResponse({'key': 0, 'errormsg': '写入数据库成功','sum':sum})
+    else:
+        pass
