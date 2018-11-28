@@ -9,7 +9,7 @@ class Users(models.Model):
     # 密码
     password = models.CharField(max_length=32)
     # 头像图片地址
-    headjpg = models.FileField(verbose_name='头像')
+    headjpg = models.FileField(verbose_name='头像',null=True)
     # 昵称
     name = models.CharField(max_length=20,null=True, blank=True)
     # 性别
@@ -60,3 +60,18 @@ class Shipaddress(models.Model):
     changetime = models.DateTimeField(auto_now=True)
     # 外键，用于连接user列表
     linkusers = models.ForeignKey(to='Users')
+
+
+# 收货地址重构
+class UserAddress(models.Model):
+    hcity = models.CharField(max_length=50,null=True,blank=True,verbose_name='省')
+    hproper = models.CharField(max_length=50,null=True,blank=True,verbose_name='市')
+    harea = models.CharField(max_length=50,verbose_name='区')
+    detail = models.CharField(max_length=200,verbose_name='详细地址')
+    person = models.CharField(max_length=20,verbose_name='收货人')
+    linktel = models.ImageField(verbose_name='联系电话')
+    defaults = models.BooleanField(default=False,blank=True,verbose_name='是否是默认地址')
+    builttime = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
+    changetime = models.DateTimeField(auto_now=True,verbose_name='修改时间')
+    linkusers = models.ForeignKey(to='Users',verbose_name='连接用户列表')
+    delets = models.BooleanField(default=False,blank=True)

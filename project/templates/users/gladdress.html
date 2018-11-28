@@ -1,32 +1,40 @@
 {% extends 'public/headandfoot.html' %}
 {% load static %}
 {% block title %}
-管理收货地址
+    管理收货地址
 {% endblock %}
 
 {% block inheader_button %}
-<div class="am-header-right am-header-nav">
-    <a href="{% url 'users:添加收货地址' %}" class="">
-        <i class="am-icon-plus"></i>
-    </a>
-</div>
+    <div class="am-header-right am-header-nav">
+        <a href="{% url 'users:添加收货地址' %}" class="">
+            <i class="am-icon-plus"></i>
+        </a>
+    </div>
 {% endblock %}
 
 {% block information %}
     <div style="height: 49px;"></div>
     <ul class="address-list">
-        <li class="curr">
-            <p>收货人：徐女士&nbsp;&nbsp;182********</p>
-            <p class="order-add1">收货地址：江西省南昌市 青云谱区解放西路258号江西省南昌市 青云谱区解放西路258号</p>
-            <hr />
-            <div class="address-cz">
-                <label class="am-radio am-warning">
-                   <input type="radio" name="radio3" value="" data-am-ucheck checked> 设为默认
-                </label>
-                <a href=""><img src="{% static 'images/bj.png' %}" width="18" />&nbsp;编辑</a>
-                <a href="">删除</a>
-            </div>
-        </li>
+        {% for data in userdata %}
+            <li address-id="{{ data.id }}" {% if data.defaults %}
+                class="curr"
+            {% endif %}>
+                <p>收货人：{{ data.person }}&nbsp;&nbsp;{{ data.linktel }}</p>
+                <p class="order-add1">收货地址：{{ data.hcity }} {{ data.hproper }}{{ data.harea }}{{ data.detail }}</p>
+                <hr/>
+                <div class="address-cz">
+                    <label class="am-radio am-warning">
+                        <input type="radio" class="is_default" name="radio3" value="" data-am-ucheck
+                                {% if data.defaults %}
+                               checked
+                                {% endif %}> 设为默认
+                    </label>
+                    <a href="{% url 'users:修改收货地址' %}/?id={{ data.id }}" class="address_edit"><img
+                            src="{% static 'images/bj.png' %}" width="18"/>&nbsp;编辑</a>
+                    <a href="javascript:;" class="address_delet">删除</a>
+                </div>
+            </li>
+        {% endfor %}
     </ul>
 {% endblock %}
 
@@ -35,7 +43,59 @@
 {% endblock %}
 
 {% block infootjs %}
-<script src="{% static 'js/jquery.min.js' %}"></script>
-<script src="{% static 'js/amazeui.min.js' %}"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/amazeui.min.js' %}"></script>
+    <script>
+        $(function () {
+            //加载完成之后进行写入
+            $('.address_delet').on('click', function () {
+                {#console.debug($(this).parents('li').attr('address-id'))#}
+                var self = this;
+                var id = $(this).parents('li').attr('address-id');
+                $.ajax({
+                    type: "post",
+                    dataType: "json",
+                    url: "{% url 'users:删除收货地址' %}",
+                    data: {
+                        "id": id,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}",
+                    },
+                    success: function (data) {
+                        if (data.key == 0) {
+                            //表示删除成功,则需要在当前页面将对应的li进行删除
+                            $(self).parents('li').remove()
+                        }
+                        ;
+                    }
+                })
+            });
+            $('.is_default').on('click', function () {
+                //表示进行默认选择,如果被选中则需要进行相应的样式修改,同时需要进行数据库的修改
+                var self = this;
+                var id = $(this).parents('li').attr('address-id');
+                // 进行数据库的改写
+                $.ajax({
+                    type: "post",
+                    data: {
+                        "id": id,
+                        "csrfmiddlewaretoken": "{{ csrf_token }}",
+                    },
+                    dataType: "json",
+                    url: "{% url 'users:修改默认地址' %}",
+                    success: function (data) {
+                        if (data.key == 0) {
+                            //表示修改成功,进行对页面的改写
+                            $('.curr').removeClass('curr');
+                            //并且在新的选中上面进行更改样式
+                            $(self).parents('li').addClass('curr');
+                        }else{
+                            alert('操作不合法')
+                        }
+                    }
+                })
+            })
+        })
+    </script>
+
 {% endblock %}
 

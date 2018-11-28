@@ -5,19 +5,20 @@ from django.core.validators import RegexValidator
 # 注册表单验证
 from django_redis import get_redis_connection
 
-from users.models import Users, Shipaddress
+from users.models import Users, Shipaddress, UserAddress
 
 
 class Reg_in(forms.Form):
     # 验证手机号
     tel = forms.CharField(max_length=11,
                           validators=[
-                              RegexValidator(r'^1[3-9]\d{9}','手机号码输入不合法')
+                              RegexValidator(r'^1[3-9]\d{9}', '手机号码输入不合法')
                           ])
     yzm = forms.CharField(max_length=4)
     # 验证密码
-    password = forms.CharField(max_length=20,min_length=6)
-    re_password = forms.CharField(max_length=20,min_length=6)
+    password = forms.CharField(max_length=20, min_length=6)
+    re_password = forms.CharField(max_length=20, min_length=6)
+
     def clean_yzm(self):
         # 针对验证码进行验证
         yzm = self.cleaned_data.get('yzm')
@@ -36,6 +37,7 @@ class Reg_in(forms.Form):
     def __str__(self):
         return self.tel
 
+
 # 登录验证信息
 class Log_in(forms.Form):
     # 验证手机号
@@ -44,35 +46,50 @@ class Log_in(forms.Form):
                               RegexValidator(r'^1[3-9]\d{9}', '手机号码输入不合法')
                           ])
     # 验证密码
-    password =  forms.CharField(max_length=20,min_length=6)
+    password = forms.CharField(max_length=20, min_length=6)
 
     def __str__(self):
         return self.tel
+
 
 # 找回密码
 class Find_password(forms.Form):
     tel = forms.CharField(max_length=11,
                           validators=[
-                              RegexValidator(r'^1[3-9]\d{9}','手机号码不合法'),
+                              RegexValidator(r'^1[3-9]\d{9}', '手机号码不合法'),
                           ])
-    password = forms.CharField(max_length=20,min_length=6)
-    re_password = forms.CharField(max_length=20,min_length=6)
+    password = forms.CharField(max_length=20, min_length=6)
+    re_password = forms.CharField(max_length=20, min_length=6)
 
     def __str__(self):
         return self.tel
+
 
 # 个人主页的form验证
 class PersonModelFrom(forms.ModelForm):
     class Meta:
         model = Users
-        fields = ['name','gender','birthday','school','address','hometown']
+        fields = ['name', 'gender', 'birthday', 'school', 'address', 'hometown']
+
 
 # 收货地址验证
 class Address_get(forms.ModelForm):
     linktel = forms.CharField(max_length=11,
-                          validators=[
-                              RegexValidator(r'^1[3-9]\d{9}','手机号码不合法'),
-                          ])
+                              validators=[
+                                  RegexValidator(r'^1[3-9]\d{9}', '手机号码不合法'),
+                              ])
+
     class Meta:
         model = Shipaddress
-        fields = ['dormitaryarea','tower','detailarea','person','defaults']
+        fields = ['dormitaryarea', 'tower', 'detailarea', 'person', 'defaults']
+
+
+# 验证收货地址添加
+class UserAddress_get(forms.ModelForm):
+    linktel = forms.CharField(max_length=11,
+                              validators=[
+                                  RegexValidator(r'^1[3-9]\d{9}', '手机号码不合法'),
+                              ])
+    class Meta:
+        model = UserAddress
+        fields = ['hcity','hproper','harea','detail','person','defaults']
