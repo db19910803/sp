@@ -16,9 +16,9 @@
     </div>
     <ul class="shopcart-list">
         {% for goods in goods_list %}
-            <li>
+            <li sku-id="{{ goods.pk }}">
                 <label class="am-checkbox am-warning">
-                    <input class="li_checkbox" type="checkbox" checked="checked" value="" data-am-ucheck checked>
+                    <input class="li_checkbox" type="checkbox" checked="checked" value="" data-am-ucheck >
                 </label>
                 <a href="{% url 'goods:商品详情' goods.pk %}"><img src="{{ MEDIA_URL }}{{ goods.logo_address }}"
                                                                class="shop-pic"/></a>
@@ -47,7 +47,7 @@
             <input class="all_check" type="checkbox" checked="checked" value="" data-am-ucheck checked>
         </label>
         <a class="del">全选</a>
-        <a href="tureorder.html" class="js-btn">去结算</a>
+        <a href="javascript:;" class="js-btn">去结算</a>
         <div class="js-text">
             <P>合计：<b class="total_sum">￥0</b></P>
             <p class="js-car">免费配送</p>
@@ -207,6 +207,24 @@
                     $('.all_check').prop('checked',false);
                     total_price();
                 }
+            })
+            //去结算
+            $('.js-btn').on('click',function () {
+                //先获取对应的物品id
+                {#console.debug(111)#}
+                var goods_obj = $('.shopcart-list').find('input:checked');
+                var list_id = new Array();
+                //选中之后进行遍历
+                $.each(goods_obj,function (i,e) {
+                    //把其中对应的额sku_id取出来
+                    {#console.debug($(e).parents('li').attr('sku-id'));#}
+                    list_id.push($(e).parents('li').attr('sku-id'))
+                });
+                {#console.debug(list_id);#}
+                {#console.debug(goods_obj.length)#}
+                //发送ajax进行跳转到订单确定页面
+                //将值保存到cookie中
+                location.href = '{% url "order:回显订单首页" %}?list_id='+list_id
             })
         })
     </script>

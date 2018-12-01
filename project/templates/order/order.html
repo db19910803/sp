@@ -1,0 +1,113 @@
+{% extends 'public/headandfoot.html' %}
+{% load static %}
+
+{% block title %}
+确认并付款
+{% endblock %}
+
+
+{% block inheadjs %}
+		<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+		<script src="{% static 'js/jquery-1.10.2.min.js' %}"></script>
+		<script src="{% static 'js/date.js' %}"></script>
+		<script src="{% static 'js/iscroll.js' %}"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#beginTime').date();
+				$('#endTime').date({theme:"datetime"});
+			});
+        </script>
+{% endblock %}
+
+{% block information %}
+	    <div style="height: 49px;"></div>
+	    <h5 class="order-tit">收货人信息</h5>
+	    <div class="order-name">
+	    		<p class="order-tele">{{ data.get_person }}&nbsp;&nbsp;&nbsp;联系方式{{ data.get_person_tel }}</p>
+	    		<p class="order-add">{{ data.order_address }}</p>
+	    	<i class="am-icon-angle-right"></i>
+	    </div>
+        <div style="background: #eee; height: 10px;"></div>
+        <h5 class="order-tit">确认订单信息</h5>
+        <ul class="shopcart-list" style="padding-bottom: 0; margin-top: 0;">
+            {% for sku_infor in data.new_order_sku_list_set.all %}
+                <li>
+                <img src="{{ MEDIA_URL }}{{ sku_infor.goods_sku.logo_address }}" class="shop-pic" />
+                <div class="order-mid">
+                	<div class="tit">{{ sku_infor.goods_sku.name }}</div>
+                	<div class="order-price">￥{{ sku_infor.goods_sku.price }} <i>X{{ sku_infor.sku_count }}</i></div>
+                </div>
+	    	</li>
+            {% endfor %}
+	    </ul>
+	    <ul class="order-infor">
+	    	<li class="order-infor-first">
+	    		<span>商品总计：</span>
+	    		<i>￥{{ data.goods_total_price }}</i>
+	    	</li>
+	    	<li class="order-infor-first">
+	    		<span>运输方式：</span>
+	    		<i>{{ data.transport.name }}</i>
+	    	</li>
+	    	<li class="order-infor-first">
+	    		<a href="">积分抵费></a>
+	    	</li>
+	    	<li class="order-infor-first">
+	    		<a href="">选择优惠券></a>
+	    	</li>
+	    </ul>
+	    <!--<div style="background: #eee; height: 10px;"></div>
+
+	    <input id="beginTime" class="select-time" placeholder="请选择配送时间 >" /></div>
+		<div id="datePlugin"></div>-->
+	    <div style="background: #eee; height: 10px;"></div>
+	    <textarea placeholder="备注说明" class="bz-infor"></textarea>
+	    <div style="background: #eee; height: 10px;"></div>
+	    <div style="height: 55px;"></div>
+	    <div class="shop-fix">
+	    	<div class="order-text">
+	    		应付总额：<span>￥{{ data.order_price }}</span>
+	    	</div>
+	    	<a href="{% url 'order:支付宝支付' %}?order_id={{ data.pk }}" class="js-btn">确认付款</a>
+	    </div>
+{% endblock %}
+<!--底部-->
+{% block footer %}
+ <div style="height: 55px;"></div>
+ <div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
+      <ul class="am-navbar-nav am-cf am-avg-sm-5">
+          <li>
+            <a href="{% url 'goods:index' %}" class="">
+                <span class="am-icon-home"></span>
+                <span class="am-navbar-label">首页</span>
+            </a>
+          </li>
+          <li>
+            <a href="message.html" class="">
+                <span class="am-icon-comments"></span>
+                <span class="am-navbar-label">动态</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'shopping:购物车' %}" class="">
+                <span class="am-icon-shopping-cart"></span>
+                <span class="am-navbar-label">购物车</span>
+            </a>
+          </li>
+          <li>
+            <a href="allorder.html" class="">
+                <span class="am-icon-file-text"></span>
+                <span class="am-navbar-label">订单</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="{% url 'users:个人首页' %}" class="curr">
+                <span class="am-icon-user"></span>
+                <span class="am-navbar-label">我的</span>
+            </a>
+          </li>
+      </ul>
+</div>
+
+{% endblock %}

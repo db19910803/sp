@@ -1,0 +1,164 @@
+{% extends 'public/headandfoot.html' %}
+{% load static %}
+
+{% block title %}
+    核对订单
+{% endblock %}
+
+
+{% block information %}
+    <form action="" method="post" id="post-data">
+        {% csrf_token %}
+        <div style="height: 49px;"></div>
+        {% if useraddress %}
+            <input type="hidden" name="address_id" value="{{ useraddress.0.id }}">
+            <li address-id="{{ useraddress.0.id }}" {% if useraddress.0.defaults %}
+                class="curr"
+            {% endif %}>
+                <p>收货人：{{ useraddress.0.person }}&nbsp;&nbsp;联系电话{{ useraddress.0.linktel }}</p>
+                <p class="order-add1">收货地址：{{ useraddress.0.hcity }}
+                    {{ useraddress.0.hproper }}{{ useraddress.0.harea }}{{ useraddress.0.detail }}</p>
+                <hr/>
+                <div class="address-cz">
+                    <a href="{% url 'users:修改收货地址' %}/?id={{ useraddress.0.id }}" class="address_edit"><img
+                            src="{% static 'images/bj.png' %}" width="18"/>&nbsp;编辑</a>
+                </div>
+            </li>
+
+        {% else %}
+            <div class="add-address">
+                <a href="{% url 'users:添加收货地址' %}">+新建收货地址</a>
+                <i class="am-icon-angle-right"></i>
+            </div>
+        {% endif %}
+
+
+
+        <div style="background: #eee; height: 10px;"></div>
+        <ul class="shopcart-list" style="padding-bottom: 0;">
+
+            {#        这里是商品回显的内容#}
+            {% for i in data %}
+                <input type="hidden" name="sku_id" value="{{ i.0.pk }}">
+                <li>
+                    <img src="{{ MEDIA_URL }}{{ i.0.logo_address }}" class="shop-pic"/>
+                    <div class="order-mid">
+                        <div class="tit">{{ i.0.goods_spu_id.name }}&emsp;{{ i.0.name }}</div>
+                        <div class="order-price">￥{{ i.0.price }} <i>X{{ i.1 }}</i></div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+        <ul class="order-infor">
+            <li class="order-infor-first">
+                <span>商品总计：</span>
+                <i>￥<span id="the_total_price">{{ total_price }}</span></i>
+            </li>
+            <li class="order-infor-first">
+                <span>运费：</span>
+                <i><select name="send_style" id="">
+                    {% for tran in trans %}
+                        <option value="{{ tran.id }}"
+                                price-trans="{{ tran.price }}">{{ tran.name }}-￥{{ tran.price }}</option>
+                    {% endfor %}
+                </select></i>
+            </li>
+        </ul>
+        <div style="background: #eee; height: 10px;"></div>
+        <textarea placeholder="备注说明" class="bz-infor"></textarea>
+        <div style="background: #eee; height: 10px;"></div>
+        <div style="height: 55px;"></div>
+    </form>
+    <div class="shop-fix">
+        <div class="order-text">
+            应付总额：<span>￥<span id="total_price">{{ total_price }}</span></span>
+        </div>
+        <a href="javascript:;" class="js-btn">提交订单</a>
+    </div>
+{% endblock %}
+
+<!--底部-->
+<div style="height: 55px;"></div>
+<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default sq-foot am-no-layout" id="">
+    <ul class="am-navbar-nav am-cf am-avg-sm-5">
+        <li>
+            <a href="index.html" class="">
+                <span class="am-icon-home"></span>
+                <span class="am-navbar-label">首页</span>
+            </a>
+        </li>
+        <li>
+            <a href="message.html" class="">
+                <span class="am-icon-comments"></span>
+                <span class="am-navbar-label">动态</span>
+            </a>
+        </li>
+        <li>
+            <a href="shopcart.html" class="">
+                <span class="am-icon-shopping-cart"></span>
+                <span class="am-navbar-label">购物车</span>
+            </a>
+        </li>
+        <li>
+            <a href="allorder.html" class="">
+                <span class="am-icon-file-text"></span>
+                <span class="am-navbar-label">订单</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="member.html" class="curr">
+                <span class="am-icon-user"></span>
+                <span class="am-navbar-label">我的</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+
+{% block infootjs %}
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/amazeui.min.js' %}"></script>
+    <script>
+        $(function () {
+            {#定义计算总价#}
+
+            function total_calculate() {
+                //查询选中的下拉框
+                var send_price = parseFloat($("select option:selected").attr('price-trans'));
+                var total = parseFloat($('#the_total_price').text());
+                total += send_price;
+                //修改对应的位置的值
+                $('#total_price').text(total.toFixed(2));
+            }
+
+            total_calculate();
+            //绑定方下拉框发生变化后进行重新计算
+            $('select').change(function () {
+                total_calculate();
+            });
+            //进行对应的参数获取将提交标签修改为提交
+            $('.js-btn').on('click', function () {
+                var data = $('#post-data').serialize();//这个地方有点坑
+                //使用ajax进行发送到后端进行验证
+                {#console.debug(data);#}
+                console.debug(data.address_id);
+                //使用ajax发送
+                $.ajax({
+                    type:'post',
+                    dataType:'json',
+                    url:'',
+                    data:data,
+                    success:function (data) {
+                        {#console.debug(data)#}
+                        if (data.key == 0){
+                            location.href = '{% url "order:订单确认等待支付" %}?order_id='+data.order
+                        }
+                    }
+                })
+            });
+        })
+    </script>
+{% endblock %}
